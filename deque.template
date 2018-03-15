@@ -1,0 +1,124 @@
+
+#include <cassert>   // Provides assert
+#include <iostream>
+#include "node2.h"  // Node template class
+
+
+
+
+//postcondition: empty deque has been created
+template <class T>
+deque<T>::deque()
+{
+	count = 0;
+	first = NULL;
+	last = NULL;
+}
+	
+// postcondition: all resouroces allocated to the deque have been deallocated
+template <class T>
+deque<T>::~deque()
+{
+	 list_clear(first);
+}
+	
+// postcondition: newly created deque is a copy of dq
+template <class T>
+deque<T>::deque(const deque<T>& dq)
+{
+	count = dq.count;
+	list_copy(dq.first, first, last);
+}
+	
+// postcondition: current deque is a copy of dq 
+template <class T>
+deque<T>::deque<T>& operator = (const deque<T>& dq)
+{
+}
+	
+	
+//precondition: deque is not empty
+// postcondition: reference to element at front of deque has been returned
+template <class T>
+T& deque<T>::front()
+{
+}
+	
+	
+ // precondition: deque is not empty
+ // postcondition: copy of element at front of deque has been returned
+template <class T>
+T deque<T>::front() const
+{
+}
+	
+// precondition: deque is not empty
+// postcondition: reference to element at front of deque has been returned
+template <class T>
+T& deque<T>::back()
+{
+}
+    
+// precondition: deque is not empty
+// postcondition: copy of element at back of deque has been returned
+template <class T>
+T deque<T>::back() const
+{
+}
+	
+	
+// precondition: deque is not full
+// postcondition: entry has been inserted at the front of the deque
+template <class T>
+void deque<T>::push_front (const T& entry)
+{
+}
+	
+// precondition: deque is not full
+// postcondition: entry has been inserted at the back of the deque
+template <class T>
+void deque<T>::push_back (const T& entry)
+{
+}
+    
+// precondition: deque is not empty
+// postcondition: element at front of deque has been removed
+template <class T>
+void deque<T>::pop_front()
+    
+// precondition: deque is not empty
+// postcondition: element at back of deque has been removed
+template <class T>
+void deque<T>::pop_back()
+    
+// postcondition: number of elements in deque has been returned
+template <class T>
+size_type deque<T>::size() const
+{
+	return count;
+}
+
+
+// postcondition: whether deque is empty has been returned
+template <class T>
+bool deque<T>::empty() const
+{
+	if(first != NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}		
+}
+    
+// postcondition: returned whether 2 deques are equal - equal is defined
+// as the deques have the same number of elements & corresponding elements are equal
+template <class U>
+friend bool operator == (const deque<U>& dq1, const deque<U>& dq2)
+	
+// postcondition: dq has been display from front to rear on out
+template <class U>
+friend std::ostream& operator<< (std::ostream& out, const deque<U>& dq)
+    
