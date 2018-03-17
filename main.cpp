@@ -58,7 +58,37 @@ int main()
 	//Printing data of deque
 	cout << d << endl;
 	
+	//Testing overloaded = function
+	cout << "Testing overloaded operator == #1" << endl;
+	deque<int> dq1;
+	dq1.push_front(0);
+	dq1.push_front(1);
+	dq1.push_front(2);
+	dq1.push_front(3);
+	deque<int> dq2;
+	dq2.push_front(100);
+	dq2.push_front(200);
+	dq2.push_front(300);
+	dq2.push_front(400);
+	cout << "Dq1 is: " << " " << dq1 << endl;
+	cout << "Dq2 is: " << " " << dq2 << endl;
+    cout << "Answer: " << " " << (dq1 == dq2) << endl;
 	
+	//Testing overloaded = function
+	cout << "Testing overloaded operator == #2" << endl;
+	deque<int> dq3;
+	dq3.push_front(0);
+	dq3.push_front(1);
+	dq3.push_front(2);
+	dq3.push_front(3);
+	deque<int> dq4;
+	dq4.push_front(0);
+	dq4.push_front(1);
+	dq4.push_front(2);
+	dq4.push_front(3);
+	cout << "Dq1 is: " << " " << dq3 << endl;
+	cout << "Dq2 is: " << " " << dq4 << endl;
+    cout << "Answer: " << " " << (dq3 == dq4) << endl;
 	
 	
 	
