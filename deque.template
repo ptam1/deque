@@ -35,8 +35,14 @@ deque<T>::deque(const deque<T>& dq)
 template <class T>
 deque<T>& deque<T>::operator = (const deque<T>& dq)
 {
-	deque<T> d;
-	d = list_copy(dq.first, first, last);
+	deque<T>& d;
+if (this == &dq) // Handle self-assignment
+{
+		return;
+}
+        list_clear(first);
+        list_copy(dq.first, first, last);
+         dq2= dq.count;
 }
 	
 	
@@ -71,7 +77,7 @@ T deque<T>::front() const
 	}
 }
 
-/*
+
 // precondition: deque is not empty
 // postcondition: reference to element at front of deque has been returned
 template <class T>
@@ -79,7 +85,7 @@ T& deque<T>::back()
 {
 	if(!empty())
 	{
-		return last->data();
+		return last->link()->data();
 	}
 }
     
@@ -90,10 +96,10 @@ T deque<T>::back() const
 {
 	if(!empty())
 	{
-		return last->data();
+		return last->link()->data();
 	}
 }	
-*/	
+
 
 // precondition: deque is not full
 // postcondition: entry has been inserted at the front of the deque
@@ -110,26 +116,29 @@ void deque<T>::push_front (const T& entry)
 template <class T>
 void deque<T>::push_back (const T& entry)
 {
-	/*
-	if(!empty())
+node<T>* previous = NULL;
+for(node<T>* i = first; i != NULL; i = i->link())	
+{
+	while(i->link() != NULL)
 	{
-	list_insert(last, entry);
+		if(i->link() != last)
+		{
+		previous = i;
+		}
+		i = i->link();
 	}
-	last = last->link();
-	count++;
-	*/
-
-	list_insert(last, entry);
-//	last = last->link();
-	count++;	
 }
-/*
+list_insert(previous->link(), entry);
+last = previous->link();
+count++;	
+}
+
 // precondition: deque is not empty
 // postcondition: element at front of deque has been removed
 template <class T>
 void deque<T>::pop_front()
 {
-	node* temp = first->link();
+	node<T>* temp = first->link();
 	if(!empty())
 	{
 		list_head_remove(first);
@@ -143,10 +152,10 @@ void deque<T>::pop_front()
 template <class T>
 void deque<T>::pop_back()
 {
-	if(!empty)
+	node<T>* previous = NULL; 
+	if(!empty())
 	{
 	node<T>* current = first;
-	node<T>* previous = NULL;
 	while(current->link() != NULL)
 	{
 		if(current->link() != last)
@@ -160,7 +169,7 @@ void deque<T>::pop_back()
 	last = previous;
 	count--;
 }
-*/
+
 // postcondition: number of elements in deque has been returned
 template <class T>
 typename deque<T>::size_type deque<T>::size() const
@@ -183,7 +192,7 @@ bool deque<T>::empty() const
 	}		
 }
 
-/*    
+   
 // postcondition: returned whether 2 deques are equal - equal is defined
 // as the deques have the same number of elements & corresponding elements are equal
 template <class U>
@@ -197,13 +206,25 @@ bool operator == (const deque<U>& dq1, const deque<U>& dq2)
 	{
 		sameNum = true;
 	}
-	else 
+	for(node<U>* i = dq1.first; i != NULL; i = i->link())
 	{
-	
+		for(node<U>* j = dq2.first; j != NULL; j = j->link())
 	{
+		if(i->data() == j->data())
+		{
+			sameElements = true;
+		}
 	}
+	}
+	
+	if((sameNum == true) && (sameElements == true))
+	{
+		answer = true;
+	}
+	return answer;
 }
-*/
+
+
 
 // postcondition: dq has been display from front to rear on out
 template <class U>
