@@ -85,10 +85,24 @@ int main()
 	dq4.push_front(0);
 	dq4.push_front(1);
 	dq4.push_front(2);
-	dq4.push_front(3);
-	cout << "Dq1 is: " << " " << dq3 << endl;
-	cout << "Dq2 is: " << " " << dq4 << endl;
+	dq4.push_front(3);  
+	cout << "Dq3 is: " << " " << dq3 << endl;
+	cout << "Dq4 is: " << " " << dq4 << endl;
     cout << "Answer: " << " " << (dq3 == dq4) << endl;
+	
+	//Testing overloaded operator = 
+    cout << "Testing overloaded operator =. Deque 1 is a copy of Deque 2." << endl;
+	dq1 = dq2;
+	cout << "Deque 1:" << " " << dq1 << endl;
+	cout << "Deque 2:" << " " << dq2 << endl;
+	
+	//Testing deque(const deque<T>& dq)
+	cout << "Testing deque(const deque<T>& dq). Newly Created Deque is a Copy of Deque4." << endl;
+	cout << "Deque4 is: " << " " << dq4 << endl;
+	deque<int> dq5(dq4);
+	cout << "Deque5 is: " << " " << dq5 << endl;
+	
+
 	
 	
 	

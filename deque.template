@@ -35,14 +35,13 @@ deque<T>::deque(const deque<T>& dq)
 template <class T>
 deque<T>& deque<T>::operator = (const deque<T>& dq)
 {
-	deque<T>& d;
-if (this == &dq) // Handle self-assignment
-{
-		return;
-}
+  if (this == &dq) // Handle self-assignment
+  {
+//	return;
+  }
         list_clear(first);
         list_copy(dq.first, first, last);
-         dq2= dq.count;
+        count = dq.count;
 }
 	
 	
