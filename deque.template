@@ -1,9 +1,10 @@
 
 #include <cassert>   // Provides assert
 #include <iostream>
+#include <cstdlib>
 #include "node2.h"  // Node template class
-
-
+#include "deque.h"
+using namespace std;
 
 
 //postcondition: empty deque has been created
@@ -32,8 +33,10 @@ deque<T>::deque(const deque<T>& dq)
 	
 // postcondition: current deque is a copy of dq 
 template <class T>
-deque<T>::deque<T>& operator = (const deque<T>& dq)
+deque<T>& deque<T>::operator = (const deque<T>& dq)
 {
+	deque<T> d;
+	d = list_copy(dq.first, first, last);
 }
 	
 	
@@ -42,21 +45,42 @@ deque<T>::deque<T>& operator = (const deque<T>& dq)
 template <class T>
 T& deque<T>::front()
 {
+	if(!empty())
+	{
+		return first->data();
+	}
+	else
+	{
+		cout << "Deque is Empty" << endl;
+	}
 }
 	
 	
- // precondition: deque is not empty
- // postcondition: copy of element at front of deque has been returned
+// precondition: deque is not empty
+// postcondition: copy of element at front of deque has been returned
 template <class T>
 T deque<T>::front() const
 {
+	if(!empty())
+	{
+		return first->data();
+	}
+	else
+	{
+		cout << "Deque is Empty" << endl;
+	}
 }
-	
+
+/*
 // precondition: deque is not empty
 // postcondition: reference to element at front of deque has been returned
 template <class T>
 T& deque<T>::back()
 {
+	if(!empty())
+	{
+		return last->data();
+	}
 }
     
 // precondition: deque is not empty
@@ -64,36 +88,82 @@ T& deque<T>::back()
 template <class T>
 T deque<T>::back() const
 {
-}
-	
-	
+	if(!empty())
+	{
+		return last->data();
+	}
+}	
+*/	
+
 // precondition: deque is not full
 // postcondition: entry has been inserted at the front of the deque
 template <class T>
 void deque<T>::push_front (const T& entry)
 {
+	list_head_insert(first, entry);
+	count++;
 }
+
 	
 // precondition: deque is not full
 // postcondition: entry has been inserted at the back of the deque
 template <class T>
 void deque<T>::push_back (const T& entry)
 {
+	/*
+	if(!empty())
+	{
+	list_insert(last, entry);
+	}
+	last = last->link();
+	count++;
+	*/
+
+	list_insert(last, entry);
+//	last = last->link();
+	count++;	
 }
-    
+/*
 // precondition: deque is not empty
 // postcondition: element at front of deque has been removed
 template <class T>
 void deque<T>::pop_front()
-    
+{
+	node* temp = first->link();
+	if(!empty())
+	{
+		list_head_remove(first);
+	}
+	first = temp;
+	count--;
+}
+
 // precondition: deque is not empty
 // postcondition: element at back of deque has been removed
 template <class T>
 void deque<T>::pop_back()
-    
+{
+	if(!empty)
+	{
+	node<T>* current = first;
+	node<T>* previous = NULL;
+	while(current->link() != NULL)
+	{
+		if(current->link() != last)
+		{
+			previous = current;
+		}
+		current = current->link();
+	}
+	list_remove(previous);
+	}
+	last = previous;
+	count--;
+}
+*/
 // postcondition: number of elements in deque has been returned
 template <class T>
-size_type deque<T>::size() const
+typename deque<T>::size_type deque<T>::size() const
 {
 	return count;
 }
@@ -103,7 +173,7 @@ size_type deque<T>::size() const
 template <class T>
 bool deque<T>::empty() const
 {
-	if(first != NULL)
+	if(count == 0)
 	{
 		return true;
 	}
@@ -112,13 +182,36 @@ bool deque<T>::empty() const
 		return false;
 	}		
 }
-    
+
+/*    
 // postcondition: returned whether 2 deques are equal - equal is defined
 // as the deques have the same number of elements & corresponding elements are equal
 template <class U>
-friend bool operator == (const deque<U>& dq1, const deque<U>& dq2)
+bool operator == (const deque<U>& dq1, const deque<U>& dq2)
+{
+	bool sameElements = false;
+	bool sameNum = false;
+	bool answer = false;
 	
+	if(dq1.size() == dq2.size())
+	{
+		sameNum = true;
+	}
+	else 
+	{
+	
+	{
+	}
+}
+*/
+
 // postcondition: dq has been display from front to rear on out
 template <class U>
-friend std::ostream& operator<< (std::ostream& out, const deque<U>& dq)
-    
+std::ostream& operator<< (std::ostream& out, const deque<U>& dq)
+{
+	for(node<U>* i = dq.first; i != NULL; i = i->link())
+	{
+		out << i->data()  << " ";
+	}
+return out;
+}
